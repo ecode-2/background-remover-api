@@ -3,3 +3,5 @@ rembg==2.0.66
 pillow==10.2.0
 requests==2.31.0
 gunicorn==21.2.0
+onnxruntime==1.17.1
+numpy==1.26.4
