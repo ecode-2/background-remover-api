@@ -19,7 +19,7 @@ def remove_background():
         crop = request.form.get('crop', 'true').lower() == 'true'
         
         # Download image
-        response = requests.get(image_url)
+        response = requests.get(image_url, timeout=30)
         input_image = Image.open(io.BytesIO(response.content))
         
         # Remove background
@@ -53,8 +53,8 @@ def remove_background():
         return send_file(img_io, mimetype='image/png')
     
     except Exception as e:
-        return f"Error: {str(e)}", 500
+        return {"error": str(e)}, 500
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=port, debug=False)
